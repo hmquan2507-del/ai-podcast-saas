@@ -26,7 +26,7 @@ services:
     restart: unless-stopped
     environment:
       APP_ENV: local
-      DATABASE_URL: postgresql+psycopg://postgres:postgres@postgres:5432/ai_podcast_saas
+      DATABASE_URL: postgresql+asyncpg://postgres:postgres@postgres:5432/ai_podcast_saas
     ports:
       - "8000:8000"
     depends_on:
