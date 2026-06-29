@@ -1,0 +1,37 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: ai_talking_video_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ai_podcast_saas
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    container_name: ai_talking_video_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
+  api:
+    build:
+      context: ./apps/api
+    container_name: ai_talking_video_api
+    restart: unless-stopped
+    environment:
+      APP_ENV: local
+      DATABASE_URL: postgresql+psycopg://postgres:postgres@postgres:5432/ai_podcast_saas
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - redis
+
+volumes:
+  postgres_data:
