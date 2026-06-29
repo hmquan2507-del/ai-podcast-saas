@@ -1,0 +1,17 @@
+node_modules/
+.pnpm-store/
+.env
+.env.local
+.env.production
+.venv/
+__pycache__/
+*.pyc
+.next/
+dist/
+build/
+.DS_Store
+*.log
+storage/
+uploads/
+exports/
+tmp/
